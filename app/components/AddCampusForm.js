@@ -1,6 +1,7 @@
 'use strict'
 import React, {Component} from 'react';
 import store, {writeCampusName, createNewCampus} from '../store'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 export default class AddCampus extends Component {
     constructor(){
@@ -26,13 +27,20 @@ export default class AddCampus extends Component {
 
     handleSubmit(event){
         event.preventDefault();
-        const name = this.state.newCampusInput;
+        const name = this.state.campusInput;
         const imgUrl = event.target.imgUrl.value;
         store.dispatch(createNewCampus(name, imgUrl));
+        this.props.history.push('/main/campuses')
     }
     
     render(){
         return (
+        <ReactCSSTransitionGroup
+            transitionName="example"
+            transitionAppear={true}
+            transitionAppearTimeout={5000}
+            transitionEnter={false}
+            transitionLeave={false}>
             <div>
                 <h1>Add a Campus</h1>
                 <form onSubmit={this.handleSubmit}>
@@ -43,6 +51,7 @@ export default class AddCampus extends Component {
                     <button type="Submit">Submit</button>
                 </form>
             </div>
+        </ReactCSSTransitionGroup>
         )
     }
 }

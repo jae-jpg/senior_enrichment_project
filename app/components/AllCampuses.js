@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import store, {fetchCampuses} from '../store';
 import {connect} from 'react-redux';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 export default class AllCampuses extends Component {
     constructor(){
@@ -23,8 +24,14 @@ export default class AllCampuses extends Component {
     render(){
         const campuses = this.state.campuses;
         return (
-            <div>
-                <h1>Campuses</h1>
+            <ReactCSSTransitionGroup
+                transitionName="example"
+                transitionAppear={true}
+                transitionAppearTimeout={5000}
+                transitionEnter={false}
+                transitionLeave={false}>
+                <div>
+                    <h1>All Campuses</h1>
                     <div>
                         {
                             campuses.map(campus => (
@@ -34,7 +41,11 @@ export default class AllCampuses extends Component {
                             ))
                         }
                     </div>
-            </div>
+                    <div>
+                    <Link to="/main/new-campus">Add a Campus</Link>
+                    </div>
+                </div>
+            </ReactCSSTransitionGroup>
         )
     }
 }

@@ -14,8 +14,7 @@ import SingleCampus from './SingleCampus';
 import SingleStudent from './SingleStudent';
 import AddStudentForm from './AddStudentForm';
 import AddCampusForm from './AddCampusForm';
-
-// put ALL OF MY MAIN SWITCHES IN HERE!!
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 export default class Main extends Component {
     componentDidMount(){
@@ -28,19 +27,16 @@ export default class Main extends Component {
     render(){
         return (
             <div>
-                <div>
-                    <Navbar />  
-                    <h1>Main</h1>
-                    <Switch>
-                        <Route exact path="/main/campuses" component={AllCampuses}/>          
-                        <Route exact path="/main/students" component={AllStudents}/>  
-                        <Route path="/main/campuses/:campusId" component={SingleCampus}/>  
-                        <Route path="/main/students/:studentId" component={SingleStudent}/>  
-                        <Route path="/main/new-student" component={AddStudentForm}/>  
-                        <Route path="/main/new-campus" component={AddCampusForm}/>
-                        <Route path="/main/list-students" component={ListStudents}/>                          
-                    </Switch>
-                </div>
+                <Navbar />  
+                <Switch>
+                    <Route exact path="/main/campuses" component={AllCampuses}/>          
+                    <Route exact path="/main/students" component={AllStudents}/>  
+                    <Route path="/main/campuses/:campusId" component={SingleCampus}/>  
+                    <Route path="/main/students/:studentId" component={SingleStudent}/>  
+                    <Route path="/main/new-student" component={AddStudentForm}/>  
+                    <Route path="/main/new-campus" component={AddCampusForm}/>
+                    <Route path="/main/list-students" component={ListStudents}/> 
+                </Switch>
             </div>
         )
     }

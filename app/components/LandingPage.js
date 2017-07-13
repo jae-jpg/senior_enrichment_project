@@ -2,6 +2,7 @@
 import React, {Component} from 'react';
 import store from '../store';
 import {Link} from 'react-router-dom';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 export default class LandingPage extends Component {
     render(){

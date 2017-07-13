@@ -19,6 +19,7 @@ const GET_CAMPUSES = 'GET_CAMPUSES';
 const CREATE_NEW_STUDENT = 'CREATE_NEW_STUDENT';
 const WRITE_CAMPUS_NAME = 'WRITE_CAMPUS_NAME';
 const SELECT_CAMPUS = 'SELECT_CAMPUS';
+const REMOVE_STUDENT = 'REMOVE_STUDENT';
 
 
 // ACTION CREATORS
@@ -44,6 +45,11 @@ export function writeCampusName(campusName){
 
 export function selectCampus(campusId){
     const action = {type: SELECT_CAMPUS, campusId: campusId}
+    return action;
+}
+
+export function removeStudent(studentId){
+    const action = {type: REMOVE_STUDENT, studentId: studentId}
     return action;
 }
 
@@ -82,7 +88,7 @@ export function createNewStudent(student, campusId){
 
 export function createNewCampus(name, imgUrl){
     return function thunk(dispatch){
-        axios.post('/api/campuses', {name, imgURL: imgUrl}) // LET'S ASSUME FOR NOW THIS IS THE APPROPRIATE OBJECT!
+        axios.post('/api/campuses', {name, imgURL: imgUrl})
         .then(res => res.data)
         .then(newCampus => {
             console.log('newCampus', newCampus);
@@ -95,8 +101,19 @@ export function updateStudent(studentId, newName, newCampus){ // newName will be
     return function thunk(dispatch){
         axios.put(`/api/students/${studentId}`, {newName, newCampus}) // THIS WILL SEND AS THE PAYLOAD TO SERVER SIDE API LINE 64
         .then(res => res.data)
-        .then(updateStudent => {
+        .then(updatedStudent => {
+            dispatch(fetchStudents());
             console.log('updated student:', updatedStudent)
+        });
+    };
+};
+
+export function deleteStudent(studentId){
+    return function thunk(dispatch){
+        axios.delete(`/api/students/${studentId}`)
+        .then(res => res.data)
+        .then(result => {
+            alert('Student deleted.');
         });
     };
 };
@@ -111,9 +128,12 @@ const reducer = function(state = initialState, action){
         case CREATE_NEW_STUDENT:
             return Object.assign({}, state, {studentInput: action.studentName});
         case WRITE_CAMPUS_NAME:
-            return Object.assign({}, state, {campusInput: action.campusName})
+            return Object.assign({}, state, {campusInput: action.campusName});
         case SELECT_CAMPUS:
-            return Object.assign({}, state, {selectedCampusId: action.campusId})
+            return Object.assign({}, state, {selectedCampusId: action.campusId});
+        case REMOVE_STUDENT:
+            const studentsArr = state.students.filter(student => student.id !== action.studentId);
+            return Object.assign({}, state, {students: studentsArr});
         default:
             return state;
     }

@@ -1,5 +1,165 @@
+body {
+    font-family: Arial;
+    min-width: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #c6bcb6;
+    /* background-color: #222222;   */
+    /* color: #7E868B;  */
+}
+
 #welcome {
     font-family: 'harry_pregular';
-    font-size: 100px;
+    font-size: 130px;
     text-align: center;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.containerNav {
+    list-style: none;
+    display: flex;
+    height: 100px;
+    background-color: #625750;
+    align-items: center;
+    padding: 0px 0px;
+    margin: 0px 0px;
+}
+
+.boxNav {
+    flex: 1;
+    font-size: 35px;
+    background-color: #625750;
+    margin: 0px 0px;
+}  
+
+a {
+    color: white;
+    font-weight: 100;
+    letter-spacing: 2px;
+    text-decoration: none;
+    background: rgba(0, 0, 0, 0.2); 
+    padding: 20px 5px; /* NEED TO FIX THIS FOR THE LIST STUDENT COMPONENT*/
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    transition:all 0.5s;
+}
+
+a:hover {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.boxID {
+    background: grey;
+}
+.containerTable {
+    display: flex;
+    width: 80%;
+    flex-direction: column;
+    flex-wrap: wrap;
+    border-radius: 10px;
+}
+
+.containerRow {
+    display: flex;
+    flex-direction: row;
+    align-items: center; 
+    background: lightgrey;
+    padding-left: 30px;
+    height: 42px;
+    border-top: 1px solid black;
+}
+
+#header {
+    background: #2E3338;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    height: 50px;
+}
+
+.col-1{
+    width: 15%;
+}
+
+.col-2{
+    width: 20%;
+}
+
+.col-3{
+    width: 15%;
+}
+
+.col-4{
+    width: 20%;
+}
+
+.col-5{
+    width: 15%;
+}
+
+img {
+    max-height: 18px;
+}
+
+.containerTable a {
+    color: white;
+    font-weight: 100;
+    letter-spacing: 2px;
+    text-decoration: none;
+    background: rgba(0, 0, 0, 0.2); 
+    padding: 12px 0px; /* NEED TO FIX THIS FOR THE LIST STUDENT COMPONENT*/
+    width: 100%;
+    text-align: center;
+    transition:all 0.5s;
+}
+
+.containerTable a:hover {
+    background: rgba(0, 0, 0, 0.3);
+}
+ 
+button {
+    background-color: white;
+    border-radius: 2px;
+    border: none;
+    color: black;
+    padding: 10px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    transition-duration: 0.3s;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #e7e7e7;
+}
+
+input {
+    width: 88%;
+    padding: 10px 10px;
+    font-size: 16px;
+}
+
+select {
+    height: 42px;
+    width: 100%;
+    padding: 10px 10px;
+    font-size: 16px;    
+}
+
+/* TRANSITION GROUP STYLING */
+.example-appear {
+  opacity: 0.01;
+}
+
+.example-appear.example-appear-active {
+  opacity: 1;
+  transition: opacity .5s ease-in;
 }

@@ -68,7 +68,7 @@ api.put('/students/:id', function(req, res, next){
 			name: newName || student.name,
 			campusId: newCampus || student.campus
 		});
-		console.log(student);
+		res.send(student);
 	});
 });
 
@@ -87,15 +87,16 @@ api.delete('/campuses/:id', function(req, res, next){
 	Campus.findById(id)
 	.then(function(campus){
 		campus.destroy();
+		res.send('Campus deleted');
 	});
 });
 
 api.delete('/students/:id', function(req, res, next){
-	console.log('reached student DELETE!')
 	const id = req.params.id;
 	Student.findById(id)
 	.then(function(student){
 		student.destroy();
+		res.send('Student deleted');
 	});
 });
 

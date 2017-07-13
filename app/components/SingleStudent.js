@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import ListStudents from './ListStudents';
 import store from '../store';
 import {Link} from 'react-router-dom';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 export default class SingleStudent extends Component {
     constructor(){
@@ -26,13 +27,17 @@ export default class SingleStudent extends Component {
         const singleStudent = students.filter(student => student.id === studentId);
         
         return (
-            <div>
-                <h1>Single Student</h1>
-                <ListStudents students={singleStudent} campuses={this.state.campuses}/>
+            <ReactCSSTransitionGroup
+                transitionName="example"
+                transitionAppear={true}
+                transitionAppearTimeout={5000}
+                transitionEnter={false}
+                transitionLeave={false}>
                 <div>
-                    <p>Use this div for additional details about the student!!!</p>
+                    <h1>Single Student</h1>
+                    <ListStudents students={singleStudent} campuses={this.state.campuses}/>
                 </div>
-            </div>
+            </ReactCSSTransitionGroup>
         )
     }
 }
