@@ -44,11 +44,9 @@ export default class AddCampus extends Component {
             <div>
                 <h1>Add a Campus</h1>
                 <form onSubmit={this.handleSubmit}>
-                    <label>Name</label>
-                    <input name="name" onChange={this.handleChange} />
-                    <label>Link to Image</label>
-                    <input name="imgUrl"/>
-                    <button type="Submit">Submit</button>
+                    <input placeholder="Enter a Campus Name" name="name" onChange={this.handleChange} />
+                    <input placeholder="Enter a Campus Image URL" name="imgUrl"/>
+                    <button id="form-submit" type="Submit">Submit</button>
                 </form>
             </div>
         </ReactCSSTransitionGroup>

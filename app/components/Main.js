@@ -14,6 +14,7 @@ import SingleCampus from './SingleCampus';
 import SingleStudent from './SingleStudent';
 import AddStudentForm from './AddStudentForm';
 import AddCampusForm from './AddCampusForm';
+import DeleteCampus from './DeleteCampus'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 export default class Main extends Component {
@@ -35,6 +36,7 @@ export default class Main extends Component {
                     <Route path="/main/students/:studentId" component={SingleStudent}/>  
                     <Route path="/main/new-student" component={AddStudentForm}/>  
                     <Route path="/main/new-campus" component={AddCampusForm}/>
+                    <Route path="/main/delete-campus/:campusId" component={DeleteCampus}/>
                     <Route path="/main/list-students" component={ListStudents}/> 
                 </Switch>
             </div>

@@ -7,10 +7,10 @@ export default class Sidebar extends Component {
         return (
             <nav>
                 <ul className='container containerNav'>
-                    <li className="boxNav" ><Link to="/">Home</Link></li>
-                    <li className="boxNav" ><Link to="/main/students">Students</Link></li>
-                    <li className="boxNav" ><Link to="/main/campuses">Campuses</Link></li>
-                    <li className="boxNav" ><Link to="/main/new-student">Add Student</Link></li>
+                    <li className="boxNav"><Link to="/">Home</Link></li>
+                    <li className="boxNav"><Link to="/main/students">Students</Link></li>
+                    <li className="boxNav"><Link to="/main/campuses">Campuses</Link></li>
+                    <li className="boxNav"><Link to="/main/new-student">Add a Student</Link></li>
                 </ul>
             </nav>
         )

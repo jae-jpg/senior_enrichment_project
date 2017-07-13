@@ -23,17 +23,19 @@ export default class AllStudents extends Component {
     
     render(){
         return (
-        <ReactCSSTransitionGroup
-            transitionName="example"
-            transitionAppear={true}
-            transitionAppearTimeout={5000}
-            transitionEnter={false}
-            transitionLeave={false}>
-            <div>
-                <h1>All Students</h1>
-                <ListStudents students={this.state.students} campuses={this.state.campuses}/>
+            <div className="component-container">
+                <ReactCSSTransitionGroup
+                    transitionName="example"
+                    transitionAppear={true}
+                    transitionAppearTimeout={5000}
+                    transitionEnter={false}
+                    transitionLeave={false}>
+                    <div>
+                        <h1>All Students</h1>
+                        <ListStudents students={this.state.students} campuses={this.state.campuses}/>
+                    </div>
+                </ReactCSSTransitionGroup>
             </div>
-        </ReactCSSTransitionGroup>
         )
     }
 }

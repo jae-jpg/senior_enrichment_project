@@ -62,6 +62,7 @@ export function fetchStudents(){
             const action = getStudents(students);
             dispatch(action);
         })
+        .catch(err => {console.log(err)});
     }
 }
 
@@ -72,7 +73,8 @@ export function fetchCampuses() {
         .then(campuses => {
             const action = getCampuses(campuses);
             dispatch(action);
-        });
+        })
+        .catch(err => {console.log(err)});
     };
 };
 
@@ -81,8 +83,10 @@ export function createNewStudent(student, campusId){
         axios.post('/api/students', {student, campusId})
         .then(res => res.data)
         .then(newStudent => {
+            dispatch(fetchStudents());
             console.log(newStudent);
-        });
+        })
+        .catch(err => {console.log(err)});
     };
 };
 
@@ -91,8 +95,10 @@ export function createNewCampus(name, imgUrl){
         axios.post('/api/campuses', {name, imgURL: imgUrl})
         .then(res => res.data)
         .then(newCampus => {
+            dispatch(fetchCampuses())
             console.log('newCampus', newCampus);
-        });
+        })
+        .catch(err => {console.log(err)});
     };
 };
 
@@ -104,7 +110,8 @@ export function updateStudent(studentId, newName, newCampus){ // newName will be
         .then(updatedStudent => {
             dispatch(fetchStudents());
             console.log('updated student:', updatedStudent)
-        });
+        })
+        .catch(err => {console.log(err)});
     };
 };
 
@@ -114,7 +121,20 @@ export function deleteStudent(studentId){
         .then(res => res.data)
         .then(result => {
             alert('Student deleted.');
-        });
+        })
+        .catch(err => {console.log(err)});
+    };
+};
+
+export function deleteCampus(campusId){
+    return function thunk(dispatch){
+        axios.delete(`/api/campuses/${campusId}`)
+        .then(res => res.data)
+        .then(result => {
+            dispatch(fetchCampuses());
+            alert('Campus deleted.');
+        })
+        .catch(err => {console.log(err)});
     };
 };
 

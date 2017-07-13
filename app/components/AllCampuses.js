@@ -18,34 +18,36 @@ export default class AllCampuses extends Component {
     }
 
     componentWillUnmount(){
-        this.unsubscribe;
+        this.unsubscribe();
     }
     
     render(){
         const campuses = this.state.campuses;
         return (
-            <ReactCSSTransitionGroup
-                transitionName="example"
-                transitionAppear={true}
-                transitionAppearTimeout={5000}
-                transitionEnter={false}
-                transitionLeave={false}>
-                <div>
-                    <h1>All Campuses</h1>
+            <div className="component-container">
+                <ReactCSSTransitionGroup
+                    transitionName="example"
+                    transitionAppear={true}
+                    transitionAppearTimeout={5000}
+                    transitionEnter={false}
+                    transitionLeave={false}>
                     <div>
-                        {
-                            campuses.map(campus => (
-                                <div key={campus.id}>
-                                    <Link to={`/main/campuses/${campus.id}`}><h3>{campus.name}</h3></Link>
-                                </div>
-                            ))
-                        }
+                        <h1>All Campuses</h1>
+                        <div>
+                            {
+                                campuses.map(campus => (
+                                    <div key={campus.id}>
+                                        <Link to={`/main/campuses/${campus.id}`}><h3>{campus.name}</h3></Link>
+                                    </div>
+                                ))
+                            }
+                        </div>
+                        <div>
+                        <Link to="/main/new-campus">Add a Campus</Link>
+                        </div>
                     </div>
-                    <div>
-                    <Link to="/main/new-campus">Add a Campus</Link>
-                    </div>
-                </div>
-            </ReactCSSTransitionGroup>
+                </ReactCSSTransitionGroup>
+            </div>
         )
     }
 }

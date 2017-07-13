@@ -14,6 +14,11 @@ body {
     text-align: center;
 }
 
+.component-container {
+    width: 100%;
+    text-align: center;
+} 
+
 .container {
     display: flex;
     flex-direction: row;
@@ -32,23 +37,24 @@ body {
 
 .boxNav {
     flex: 1;
-    font-size: 35px;
+    font-size: 30px;
     background-color: #625750;
     margin: 0px 0px;
+    letter-spacing: 5px;
 }  
 
-a {
+ a {
     color: white;
-    font-weight: 100;
-    letter-spacing: 2px;
+    font-weight: 100; 
+    letter-spacing: 2px; 
     text-decoration: none;
-    background: rgba(0, 0, 0, 0.2); 
-    padding: 20px 5px; /* NEED TO FIX THIS FOR THE LIST STUDENT COMPONENT*/
-    display: inline-block;
-    width: 100%;
+    background: rgba(0, 0, 0, 0.2);  
+    padding: 20px 5px;
+    display: inline-block; 
+    width: 100%; 
     text-align: center;
-    transition:all 0.5s;
-}
+    transition:all 0.5s;   
+} 
 
 a:hover {
     background: rgba(0, 0, 0, 0.3);
@@ -59,7 +65,7 @@ a:hover {
 }
 .containerTable {
     display: flex;
-    width: 80%;
+    width: 100%;
     flex-direction: column;
     flex-wrap: wrap;
     border-radius: 10px;
@@ -68,7 +74,7 @@ a:hover {
 .containerRow {
     display: flex;
     flex-direction: row;
-    align-items: center; 
+    align-items: center;  
     background: lightgrey;
     padding-left: 30px;
     height: 42px;
@@ -123,7 +129,7 @@ img {
     background: rgba(0, 0, 0, 0.3);
 }
  
-button {
+button, .button {
     background-color: white;
     border-radius: 2px;
     border: none;
@@ -141,6 +147,27 @@ button:hover {
     background-color: #e7e7e7;
 }
 
+.spacer {
+    margin: 100px;
+}
+
+.buttons-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center; 
+}
+
+.campus-button {
+    width: 50%;
+    margin: 2px 0px;
+}
+
+.delete-button {
+    width: 20%;
+    margin: 2px 0px;
+}
+
 input {
     width: 88%;
     padding: 10px 10px;
@@ -152,6 +179,10 @@ select {
     width: 100%;
     padding: 10px 10px;
     font-size: 16px;    
+}
+
+#form-submit {
+    display: block;
 }
 
 /* TRANSITION GROUP STYLING */

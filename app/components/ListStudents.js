@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import store, {writeStudentName, updateStudent, selectCampus, deleteStudent} from '../store';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
+
 export default class ListStudents extends Component {
     
     constructor(){
@@ -81,6 +82,7 @@ export default class ListStudents extends Component {
         };
 
         return (
+        <div className="component-container">
             <ReactCSSTransitionGroup
                 transitionName="example"
                 transitionAppear={true}
@@ -147,6 +149,7 @@ export default class ListStudents extends Component {
                     }
                 </div>
             </ReactCSSTransitionGroup>
+        </div>
         )
     }
 }

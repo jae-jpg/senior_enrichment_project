@@ -27,17 +27,19 @@ export default class SingleStudent extends Component {
         const singleStudent = students.filter(student => student.id === studentId);
         
         return (
-            <ReactCSSTransitionGroup
-                transitionName="example"
-                transitionAppear={true}
-                transitionAppearTimeout={5000}
-                transitionEnter={false}
-                transitionLeave={false}>
-                <div>
-                    <h1>Single Student</h1>
-                    <ListStudents students={singleStudent} campuses={this.state.campuses}/>
-                </div>
-            </ReactCSSTransitionGroup>
+            <div className="component-container">
+                <ReactCSSTransitionGroup
+                    transitionName="example"
+                    transitionAppear={true}
+                    transitionAppearTimeout={5000}
+                    transitionEnter={false}
+                    transitionLeave={false}>
+                    <div>
+                        <h1>Single Student</h1>
+                        <ListStudents students={singleStudent} campuses={this.state.campuses}/>
+                    </div>
+                </ReactCSSTransitionGroup>
+            </div>
         )
     }
 }
