@@ -78,77 +78,82 @@ export default class ListStudents extends Component {
         });
 
         const findCampus = function(student){
+            console.log(student.campusId, campuses);
             return campuses.find(campus => campus.id === student.campusId);
         };
 
         return (
         <div className="component-container">
-            <ReactCSSTransitionGroup
-                transitionName="example"
-                transitionAppear={true}
-                transitionAppearTimeout={5000}
-                transitionEnter={false}
-                transitionLeave={false}>
-                <div className="containerTable">
-                    <div className="containerRow" id="header">
-                        <div className="col-1">ID</div>
-                        <div className="col-2">Name</div>
-                        <div className="col-3"></div>
-                        <div className="col-4">House</div>
-                        <div className="col-5"></div>
-                        <div className="col-6"></div>
-                    </div>
-                    {
-                        editableStudents.map(function(student){
-                            return (
-                                <div className="containerRow" key={student.id}>
-                                    <div className="col-1">{student.id}</div>
-                                    <div className="col-2">
-                                        {
-                                            student.editNameMode === 'Edit' ?
-                                            <Link to={`/main/students/${student.id}`}>{student.name}</Link> :
-                                            <input onChange={handleNameChange}></input>
-                                        }
-                                    </div>
-                                    <div className="col-3">
-                                        <button
-                                            value={student.id}
-                                            onClick={(event) => handleNameClick(event, student)}>
-                                            {student.editNameMode}
-                                        </button>
-                                    </div>
-                                    <div className="col-4">
-                                        {
-                                            student.editCampusMode === 'Edit' ?
-                                            <Link to={`/main/campuses/${findCampus(student).id}`}>{findCampus(student).name}</Link> :
-                                            <select onChange={handleCampusChange}>
+            {
+                editableStudents.length ? (
+                    <ReactCSSTransitionGroup
+                        transitionName="example"
+                        transitionAppear={true}
+                        transitionAppearTimeout={5000}
+                        transitionEnter={false}
+                        transitionLeave={false}>
+                        <div className="containerTable">
+                            <div className="containerRow" id="header">
+                                <div className="col-1">ID</div>
+                                <div className="col-2">Name</div>
+                                <div className="col-3"></div>
+                                <div className="col-4">House</div>
+                                <div className="col-5"></div>
+                                <div className="col-6"></div>
+                            </div>
+                            {
+                                editableStudents.map(function(student){
+                                    return (
+                                        <div className="containerRow" key={student.id}>
+                                            <div className="col-1">{student.id}</div>
+                                            <div className="col-2">
                                                 {
-                                                    campuses.map(campus => (
-                                                        <option key={campus.id} value={campus.id}>{campus.name}</option>
-                                                    ))
+                                                    student.editNameMode === 'Edit' ?
+                                                    <Link to={`/main/students/${student.id}`}>{student.name}</Link> :
+                                                    <input onChange={handleNameChange}></input>
                                                 }
-                                            </select>
-                                        }
-                                    </div>
-                                    <div className="col-5">
-                                        <button
-                                            onClick={(event) => handleCampusClick(event, student)}>
-                                            {student.editCampusMode}
-                                        </button>
-                                    </div>
-                                    <div className="col-6">
-                                        <button
-                                            className="btn btn-default btn-xs"
-                                            onClick={(event) => handleDeleteClick(event, student)}>
-                                            x
-                                        </button>
-                                    </div>
-                                </div>
-                            )
-                        })
-                    }
-                </div>
-            </ReactCSSTransitionGroup>
+                                            </div>
+                                            <div className="col-3">
+                                                <button
+                                                    value={student.id}
+                                                    onClick={(event) => handleNameClick(event, student)}>
+                                                    {student.editNameMode}
+                                                </button>
+                                            </div>
+                                            <div className="col-4">
+                                                {
+                                                    student.editCampusMode === 'Edit' ?
+                                                    <Link to={`/main/campuses/`}>Test Campus</Link> :
+                                                    <select onChange={handleCampusChange}>
+                                                        {
+                                                            campuses.map(campus => (
+                                                                <option key={campus.id} value={campus.id}>{campus.name}</option>
+                                                            ))
+                                                        }
+                                                    </select>
+                                                }
+                                            </div>
+                                            <div className="col-5">
+                                                <button
+                                                    onClick={(event) => handleCampusClick(event, student)}>
+                                                    {student.editCampusMode}
+                                                </button>
+                                            </div>
+                                            <div className="col-6">
+                                                <button
+                                                    className="btn btn-default btn-xs"
+                                                    onClick={(event) => handleDeleteClick(event, student)}>
+                                                    x
+                                                </button>
+                                            </div>
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div>
+                    </ReactCSSTransitionGroup>
+                ) : null
+            }
         </div>
         )
     }

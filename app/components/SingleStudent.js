@@ -35,7 +35,7 @@ export default class SingleStudent extends Component {
                     transitionEnter={false}
                     transitionLeave={false}>
                     <div>
-                        <h1>Single Student</h1>
+                        <h1>{singleStudent.name}</h1>
                         <ListStudents students={singleStudent} campuses={this.state.campuses}/>
                     </div>
                 </ReactCSSTransitionGroup>
