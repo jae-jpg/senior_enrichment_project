@@ -26,7 +26,7 @@ export default class ListStudents extends Component {
         this.unsubcribe();
     }
 
-    // HANDLERS FOR ~*NAME*~ CHANGE AND SUBMITE
+    // HANDLERS FOR ~*NAME*~ CHANGE AND SUBMI
     handleNameChange(event){
         store.dispatch(writeStudentName(event.target.value));
     }
@@ -35,13 +35,14 @@ export default class ListStudents extends Component {
         if (student.editNameMode === 'Done') {
             const name = store.getState().studentInput;
             store.dispatch(updateStudent(student.id, name));
+            store.dispatch(writeStudentName(''));
             this.forceUpdate();
         }
         student.editNameMode === 'Edit' ? student.editNameMode = 'Done' : student.editNameMode = 'Edit';
         this.forceUpdate();
     }
 
-    // HANDLERS FOR ~*NAME*~ CHANGE AND SUBMITE
+    // HANDLERS FOR ~*CAMPUS*~ CHANGE AND SUBMI
     handleCampusChange(event){
         const campusId = parseInt(event.target.value);
         store.dispatch(selectCampus(campusId));
@@ -51,6 +52,7 @@ export default class ListStudents extends Component {
         if (student.editCampusMode === 'Done') {
             const campusId = store.getState().selectedCampusId;
             store.dispatch(updateStudent(student.id, null, campusId))
+            store.dispatch(selectCampus(null));
             this.forceUpdate();
         }
         student.editCampusMode === 'Edit' ? student.editCampusMode = 'Done' : student.editCampusMode = 'Edit';

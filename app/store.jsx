@@ -11,10 +11,12 @@ const initialState = {
     studentInput: '',
     emailInput: '',
     campusInput: '',
-    selectedCampusId: 0
+    selectedCampusId: 0,
+    currentImage: '',
+    currentImageId: 0
 }
 
-// ACTIONS
+// ACTION TYPES
 const GET_STUDENTS = 'GET_STUDENTS';
 const GET_CAMPUSES = 'GET_CAMPUSES';
 const CREATE_NEW_STUDENT = 'CREATE_NEW_STUDENT';
@@ -22,7 +24,8 @@ const WRITE_STUDENT_EMAIL = 'WRITE_STUDENT_EMAIL';
 const WRITE_CAMPUS_NAME = 'WRITE_CAMPUS_NAME';
 const SELECT_CAMPUS = 'SELECT_CAMPUS';
 const REMOVE_STUDENT = 'REMOVE_STUDENT';
-
+const CHANGE_IMAGE = 'CHANGE_IMAGE';
+const CHANGE_IMAGE_ID = 'CHANGE_IMAGE_ID';
 
 // ACTION CREATORS
 export function getStudents(studentsArray){
@@ -57,6 +60,16 @@ export function selectCampus(campusId){
 
 export function removeStudent(studentId){
     const action = {type: REMOVE_STUDENT, studentId: studentId}
+    return action;
+}
+
+export function changeImage(imgUrl){
+    const action = {type: CHANGE_IMAGE, image: imgUrl}
+    return action;
+}
+
+export function changeImageId(id){
+    const action = {type: CHANGE_IMAGE_ID, imageId: id}
     return action;
 }
 
@@ -164,6 +177,10 @@ const reducer = function(state = initialState, action){
         case REMOVE_STUDENT:
             const studentsArr = state.students.filter(student => student.id !== action.studentId);
             return Object.assign({}, state, {students: studentsArr});
+        case CHANGE_IMAGE:
+            return Object.assign({}, state, {currentImage: action.image})
+        case CHANGE_IMAGE_ID:
+            return Object.assign({}, state, {currentImageId: action.imageId})
         default:
             return state;
     }

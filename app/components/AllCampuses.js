@@ -1,7 +1,7 @@
 'use strict'
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import store, {fetchCampuses} from '../store';
+import store, {fetchCampuses, changeImage, changeImageId} from '../store';
 import {connect} from 'react-redux';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
@@ -9,6 +9,8 @@ export default class AllCampuses extends Component {
     constructor(){
         super();
         this.state = store.getState()
+        this.handleMouseLeave = this.handleMouseLeave.bind(this);
+        this.handleMouseEnter = this.handleMouseEnter.bind(this);
     }
 
     componentDidMount(){
@@ -21,6 +23,18 @@ export default class AllCampuses extends Component {
         this.unsubscribe();
     }
     
+    handleMouseEnter(campus){
+        console.log('image URL:', campus.imgURL);
+        store.dispatch(changeImage(campus.imgURL));
+        store.dispatch(changeImageId(campus.id));
+    }
+
+    handleMouseLeave(){
+        console.log('mouse left');
+        store.dispatch(changeImage(null));
+        store.dispatch(changeImageId(null));
+    }
+
     render(){
         const campuses = this.state.campuses;
         return (
@@ -36,8 +50,30 @@ export default class AllCampuses extends Component {
                         <div>
                             {
                                 campuses.map(campus => (
-                                    <div key={campus.id}>
-                                        <Link to={`/main/campuses/${campus.id}`}><h3>{campus.name}</h3></Link>
+                                    this.state.currentImageId === campus.id ? 
+                                    <div 
+                                        onMouseEnter={(event) => this.handleMouseEnter(campus)}
+                                        onMouseLeave={this.handleMouseLeave}
+                                        key={campus.id}
+                                        style={{
+                                            backgroundImage: 'url(' + this.state.currentImage + ')',
+                                            backgroundRepeat: 'no-repeat',
+                                            backgroundPosition: 'center',
+                                            backgroundSize: '100%'
+                                        }}
+                                    >
+                                        <Link to={`/main/campuses/${campus.id}`}>
+                                            <h3>{campus.name}</h3>
+                                        </Link>
+                                    </div> : 
+                                    <div 
+                                        onMouseEnter={(event) => this.handleMouseEnter(campus)}
+                                        onMouseLeave={this.handleMouseLeave}
+                                        key={campus.id}
+                                    >
+                                        <Link to={`/main/campuses/${campus.id}`}>
+                                            <h3>{campus.name}</h3>
+                                        </Link>
                                     </div>
                                 ))
                             }
