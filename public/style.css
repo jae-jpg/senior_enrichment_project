@@ -4,8 +4,6 @@ body {
     margin: 0;
     padding: 0;
     background-color: #c6bcb6;
-    /* background-color: #222222;   */
-    /* color: #7E868B;  */
 }
 
 #welcome {
@@ -148,7 +146,7 @@ button:hover {
 }
 
 .spacer {
-    margin: 100px;
+    margin: 60px;
 }
 
 .buttons-container {
@@ -183,6 +181,12 @@ select {
 
 #form-submit {
     display: block;
+}
+
+.new-instance {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
 }
 
 /* TRANSITION GROUP STYLING */

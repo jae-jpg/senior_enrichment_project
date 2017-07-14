@@ -1,6 +1,6 @@
 'use strict'
 import React, {Component} from 'react';
-import store, {writeStudentName, createNewStudent} from '../store'
+import store, {writeStudentName, createNewStudent, writeStudentEmail} from '../store'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 export default class AddStudentForm extends Component {
@@ -20,17 +20,23 @@ export default class AddStudentForm extends Component {
         this.unsubscribe();
     };
 
-    handleChange(event){
+    handleNameChange(event){
         const name = event.target.value;
         store.dispatch(writeStudentName(name));   
     };
+
+    handleEmailChange(event){
+        const email = event.target.value;
+        store.dispatch(writeStudentEmail(email));
+    }
 
     handleSubmit(event){
         event.preventDefault();
         const campusId = event.target.campus.value;
         const name = this.state.studentInput;
-        store.dispatch(createNewStudent({ name }, campusId));
-        console.log('this props history:', this.props.history);
+        const email = this.state.emailInput;
+        const student = {name, email}
+        store.dispatch(createNewStudent(student, campusId));
         this.props.history.push(`/main/campuses/${campusId}`)
     }
     
@@ -46,14 +52,17 @@ export default class AddStudentForm extends Component {
                 <div>
                     <h1>Add a Student</h1>
                     <form onSubmit={this.handleSubmit}>
-                        <input onChange={this.handleChange} />
-                        <select name="campus">
-                            {
-                                campuses.map(campus => (
-                                    <option key={campus.id} value={campus.id}>{campus.name}</option>
-                                ))
-                            }
-                        </select>
+                        <div className="new-instance">
+                            <input className="new-instance-box" placeholder="Enter a Student Name" onChange={this.handleNameChange} />
+                            <input className="new-instance-box" placeholder="Enter a Student Email" onChange={this.handleEmailChange}/>
+                            <select className="new-instance-box" name="campus">
+                                {
+                                    campuses.map(campus => (
+                                        <option key={campus.id} value={campus.id}>{campus.name}</option>
+                                    ))
+                                }
+                            </select>
+                        </div>
                         <button type="Submit">Submit</button>
                     </form>
                 </div>

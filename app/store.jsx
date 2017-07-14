@@ -9,6 +9,7 @@ const initialState = {
     students: [],
     campuses: [],
     studentInput: '',
+    emailInput: '',
     campusInput: '',
     selectedCampusId: 0
 }
@@ -17,6 +18,7 @@ const initialState = {
 const GET_STUDENTS = 'GET_STUDENTS';
 const GET_CAMPUSES = 'GET_CAMPUSES';
 const CREATE_NEW_STUDENT = 'CREATE_NEW_STUDENT';
+const WRITE_STUDENT_EMAIL = 'WRITE_STUDENT_EMAIL';
 const WRITE_CAMPUS_NAME = 'WRITE_CAMPUS_NAME';
 const SELECT_CAMPUS = 'SELECT_CAMPUS';
 const REMOVE_STUDENT = 'REMOVE_STUDENT';
@@ -37,6 +39,11 @@ export function writeStudentName(studentName){
     const action = {type: CREATE_NEW_STUDENT, studentName: studentName}
     return action;
 };
+
+export function writeStudentEmail(studentEmail){
+    const action = {type: WRITE_STUDENT_EMAIL, studentEmail: studentEmail}
+    return action;
+}
 
 export function writeCampusName(campusName){
     const action = {type: WRITE_CAMPUS_NAME, campusName: campusName}
@@ -95,7 +102,7 @@ export function createNewCampus(name, imgUrl){
         axios.post('/api/campuses', {name, imgURL: imgUrl})
         .then(res => res.data)
         .then(newCampus => {
-            dispatch(fetchCampuses())
+            dispatch(fetchCampuses());
             console.log('newCampus', newCampus);
         })
         .catch(err => {console.log(err)});
@@ -103,13 +110,12 @@ export function createNewCampus(name, imgUrl){
 };
 
 export function updateStudent(studentId, newName, newCampus){ // newName will be received from the action created in the click handler
-    console.log('testing put:', newName, newCampus);
     return function thunk(dispatch){
         axios.put(`/api/students/${studentId}`, {newName, newCampus}) // THIS WILL SEND AS THE PAYLOAD TO SERVER SIDE API LINE 64
         .then(res => res.data)
         .then(updatedStudent => {
+            dispatch(fetchCampuses());
             dispatch(fetchStudents());
-            console.log('updated student:', updatedStudent)
         })
         .catch(err => {console.log(err)});
     };
@@ -120,6 +126,8 @@ export function deleteStudent(studentId){
         axios.delete(`/api/students/${studentId}`)
         .then(res => res.data)
         .then(result => {
+            dispatch(fetchStudents());
+            dispatch(fetchCampuses());
             alert('Student deleted.');
         })
         .catch(err => {console.log(err)});
@@ -147,6 +155,8 @@ const reducer = function(state = initialState, action){
             return Object.assign({}, state, {campuses: action.campuses});
         case CREATE_NEW_STUDENT:
             return Object.assign({}, state, {studentInput: action.studentName});
+        case WRITE_STUDENT_EMAIL:
+            return Object.assign({}, state, {emailInput: action.studentEmail})
         case WRITE_CAMPUS_NAME:
             return Object.assign({}, state, {campusInput: action.campusName});
         case SELECT_CAMPUS:

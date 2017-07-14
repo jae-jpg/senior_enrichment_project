@@ -18,7 +18,7 @@ export default class ListStudents extends Component {
 
     componentDidMount(){
         this.unsubcribe = store.subscribe(() => {
-            this.setState(store.getState())
+            this.setState(store.getState());
         });
     };
 
@@ -51,6 +51,7 @@ export default class ListStudents extends Component {
         if (student.editCampusMode === 'Done') {
             const campusId = store.getState().selectedCampusId;
             store.dispatch(updateStudent(student.id, null, campusId))
+            this.forceUpdate();
         }
         student.editCampusMode === 'Edit' ? student.editCampusMode = 'Done' : student.editCampusMode = 'Edit';
         this.forceUpdate();
@@ -60,7 +61,9 @@ export default class ListStudents extends Component {
         store.dispatch(deleteStudent(student.id))
     }
 
+
     render() {
+        const jsxVariable = <div></div>
         const students = this.props.students;
         const campuses = this.props.campuses;
         const handleNameClick = this.handleNameClick;
@@ -78,8 +81,13 @@ export default class ListStudents extends Component {
         });
 
         const findCampus = function(student){
-            console.log(student.campusId, campuses);
             return campuses.find(campus => campus.id === student.campusId);
+        };
+
+        const campusField = function(student){
+            return findCampus(student) ?
+            <Link to={`/main/campuses/${findCampus(student).id}`}>{findCampus(student).name}</Link> :
+            <Link to={`/main/students/${student.id}`}>Choose a Campus</Link>;
         };
 
         return (
@@ -123,7 +131,7 @@ export default class ListStudents extends Component {
                                             <div className="col-4">
                                                 {
                                                     student.editCampusMode === 'Edit' ?
-                                                    <Link to={`/main/campuses/`}>Test Campus</Link> :
+                                                    campusField(student) :
                                                     <select onChange={handleCampusChange}>
                                                         {
                                                             campuses.map(campus => (
@@ -158,73 +166,3 @@ export default class ListStudents extends Component {
         )
     }
 }
-
-
-// OLD RETURN
-// return (
-//             <div>
-//                 <h1>Students</h1>
-//                 <div>
-//                     <table>
-//                         <divead>
-//                             <div className="container containerTable">
-//                                 <div>ID Number</div>
-//                                 <div>Name</div>
-//                                 <div></div>
-//                                 <div>House</div>
-//                                 <div></div>
-//                             </div>
-//                         </divead>
-//                         <tbody>
-//                             {
-//                                 students.map(function(student){
-//                                     return (
-//                                         <div className="container boxRow" key={student.id}>
-//                                             <div className="boxID">{student.id}</div>
-//                                             <div>
-//                                                 {
-//                                                     student.editNameMode === 'Edit' ?
-//                                                     student.name :
-//                                                     <input onChange={handleNameChange}></input>
-//                                                 }
-//                                             </div>
-//                                             <div>
-//                                                 <button
-//                                                     value={student.id}
-//                                                     onClick={(event) => handleNameClick(event, student)}>
-//                                                     {student.editNameMode}
-//                                                 </button>
-//                                             </div>
-//                                             <div>
-//                                                 {
-//                                                     student.editCampusMode === 'Edit' ?
-//                                                     findCampus(student).name :
-//                                                     <select onChange={handleCampusChange}>
-//                                                         {
-//                                                             campuses.map(campus => (
-//                                                                 <option key={campus.id} value={campus.id}>{campus.name}</option>
-//                                                             ))
-//                                                         }
-//                                                     </select>
-//                                                 }
-//                                                 <button
-//                                                     onClick={(event) => handleCampusClick(event, student)}>
-//                                                     {student.editCampusMode}
-//                                                 </button>
-//                                             </div>
-//                                             <div>
-//                                                 <button
-//                                                     className="btn btn-default btn-xs"
-//                                                     onClick={(event) => handleDeleteClick(event, student)}>
-//                                                     <span className="glyphicon glyphicon-remove"></span>
-//                                                 </button>
-//                                             </div>
-//                                         </div>
-//                                     )
-//                                 })
-//                             }
-//                         </tbody>
-//                     </table>
-//                 </div>
-//             </div>
-//         )

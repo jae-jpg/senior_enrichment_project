@@ -44,8 +44,10 @@ export default class AddCampus extends Component {
             <div>
                 <h1>Add a Campus</h1>
                 <form onSubmit={this.handleSubmit}>
-                    <input placeholder="Enter a Campus Name" name="name" onChange={this.handleChange} />
-                    <input placeholder="Enter a Campus Image URL" name="imgUrl"/>
+                    <div className="new-instance">
+                        <input placeholder="Enter a Campus Name" name="name" onChange={this.handleChange} />
+                        <input placeholder="Enter a Campus Image URL" name="imgUrl"/>
+                    </div>
                     <button id="form-submit" type="Submit">Submit</button>
                 </form>
             </div>

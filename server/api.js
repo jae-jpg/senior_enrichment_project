@@ -42,7 +42,6 @@ api.get('/students/:id', function(req, res, next){
 });
 
 api.post('/campuses', function(req, res, next){
-	console.log('reached campuses POST!');
 	Campus.create(req.body)
 	.then(function(newCampus){
 		res.json(newCampus);
